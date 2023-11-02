@@ -17,7 +17,7 @@ using NetworkEvent = Unity.Networking.Transport.NetworkEvent;
 using TMPro;
 using UnityEngine.UI;
 
-public class RelayManagement : MonoBehaviour //MonoBehaviour
+public class RelayManagement : MonoBehaviour
 {
     const int m_MaxConnections = 4;
 
@@ -35,12 +35,10 @@ public class RelayManagement : MonoBehaviour //MonoBehaviour
     public void RelayHostStart()
     {
         BtnPanel.SetActive(false);
-        //await AllocateRelayServerAndGetJoinCode(m_MaxConnections);
         StartCoroutine(Example_ConfigureTransportAndStartNgoAsHost());
     }
     public void RelayClinetStart()
     {
-        //await JoinRelayServerFromJoinCode(RelayJoinCode);
         StartCoroutine(Example_ConfigreTransportAndStartNgoAsConnectingPlayer());
     }
 
@@ -87,7 +85,7 @@ public class RelayManagement : MonoBehaviour //MonoBehaviour
         var dtlsEndpoint = allocation.ServerEndpoints.First(e => e.ConnectionType == "dtls");
         return (dtlsEndpoint.Host, (ushort)dtlsEndpoint.Port, allocation.AllocationIdBytes, allocation.ConnectionData, allocation.Key, createJoinCode);
     }
-    IEnumerator Example_ConfigureTransportAndStartNgoAsHost()//È£½ºÆ® ½ÃÀÛ
+    IEnumerator Example_ConfigureTransportAndStartNgoAsHost()//í˜¸ìŠ¤íŠ¸ ì‹œì‘
     {
         var serverRelayUtilityTask = AllocateRelayServerAndGetJoinCode(m_MaxConnections);
         while (!serverRelayUtilityTask.IsCompleted)
@@ -129,7 +127,7 @@ public class RelayManagement : MonoBehaviour //MonoBehaviour
         var dtlsEndpoint = allocation.ServerEndpoints.First(e => e.ConnectionType == "dtls");
         return (dtlsEndpoint.Host, (ushort)dtlsEndpoint.Port, allocation.AllocationIdBytes, allocation.ConnectionData, allocation.HostConnectionData, allocation.Key);
     }
-    IEnumerator Example_ConfigreTransportAndStartNgoAsConnectingPlayer()//Å¬¶óÀÌ¾ğÆ® ½ÃÀÛ
+    IEnumerator Example_ConfigreTransportAndStartNgoAsConnectingPlayer()//í´ë¼ì´ì–¸íŠ¸ ì‹œì‘
     {
         var clientRelayUtilityTask = JoinRelayServerFromJoinCode(RelayJoinCode);
 
